@@ -75,5 +75,8 @@ while True:
         quit()
     elif instruction == 's':
         save_tags()
+    elif instruction == 'se' or instruction == '.':
+        save_tags()
+        quit()
     else:
         print "Unrecognized instruction: {}".format(instruction)
