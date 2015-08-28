@@ -13,21 +13,24 @@ Interactive command-line mp3 tagger.
 ./taggr.py snap_out_of_it.mp3
 title: Snap out of it
 Enter '?' for help.
-> h
+> ?
 Commands:
 t [title] - set title
 a [artist] - set artist
 b [album] - set album
 d [t|a|b] - delete a tag
+r - restore tags to last save
 l - list tags
 h, ? - display this help page
 e, q - exit without saving
 s - save tags to file
-se, . - save tags to file and exit
+. - save tags to file and exit
 > a Arctic Monkeys
 Artist set to 'Arctic Monkeys'.
 > s
 Tags saved to file.
 > b AM
 Album set to 'AM'.
+> e
+Throwing away modifications.
 ```

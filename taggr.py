@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 
+import copy
 import os
 import sys
 import taglib
@@ -12,8 +13,12 @@ def quit():
     sys.exit(0)
 
 def save_tags():
+    global tags_modified
+
     if tags_modified:
         mp3file.save()
+        tags_modified = False
+
         print "Tags saved to file."
     else:
         print "No modifications."
@@ -35,6 +40,7 @@ mp3file = taglib.File(filename)
 util.list_tags(mp3file)
 print "Enter '?' for help."
 
+last_saved_tags = copy.deepcopy(mp3file.tags)
 tags_modified = False
 
 while True:
@@ -47,6 +53,7 @@ while True:
     operands = input[1:]
 
     if instruction in util.tag_commands:
+        # TODO: only set if a different value was entered
         cmd_tag = util.tag_commands[instruction]['tag']
         cmd_name = util.tag_commands[instruction]['name']
         new_value = unicode(' '.join(operands))
@@ -67,6 +74,12 @@ while True:
                 tags_modified = True
 
                 print "Deleted {} tag.".format(cmd_name)
+    elif instruction == 'r':
+        # TODO: Check if initial_tags deep-equal initial_tags
+        mp3file.tags = last_saved_tags
+        tags_modified = False
+
+        print "Tags restored to last save."
     elif instruction == 'h' or instruction == '?':
         util.print_help()
     elif instruction == 'l':
@@ -75,7 +88,7 @@ while True:
         quit()
     elif instruction == 's':
         save_tags()
-    elif instruction == 'se' or instruction == '.':
+    elif instruction == '.':
         save_tags()
         quit()
     else:

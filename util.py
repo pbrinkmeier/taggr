@@ -36,7 +36,9 @@ def print_help():
         )
 
     print """d [{}] - delete a tag
-l - List tags
+r - restore tags to last save
+l - list tags
 h, ? - display this help page
 e, q - exit without saving
-s - save tags to file""".format('|'.join(tag_commands.keys()))
+s - save tags to file
+se, . - save tags to file and exit""".format('|'.join(tag_commands.keys()))
